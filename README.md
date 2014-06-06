@@ -6,3 +6,4 @@ Dictionaries
 
 The documentation for the driver can be found in the original driver's [wiki docs](https://github.com/yojimbo87/ArangoDB-NET/wiki).
 
+You find the driver DLL under nuget with the name triAGENS-ArangoDB-NET version 1.1.0
