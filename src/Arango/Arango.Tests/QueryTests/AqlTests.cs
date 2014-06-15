@@ -196,5 +196,37 @@ namespace Arango.Tests.QueryTests
             Assert.AreEqual(prettyPrintQuery, expression.ToString());
             Assert.AreEqual(shrotQuery, expression.ToString(false));
         }
+
+        [Test()]
+        public void Shoud_generate_query_Numeric_Functions()
+        {
+            var query = "FOR item IN UserModelCollection LIMIT 1 LET Age = item.Age LET Floor = FLOOR(item.Age) LET Ceil = CEIL(item.Age) LET Round = ROUND(item.Age) LET Abs = ABS(item.Age) LET Sqrt = SQRT(item.Age) LET Rand = RAND() RETURN { 'Age': Age, 'Floor': Floor, 'Ceil': Ceil, 'Round': Round, 'Abs': Abs, 'Sqrt': Sqrt, 'Rand': Rand }";
+
+            ArangoQueryOperation expression = new ArangoQueryOperation()
+                .Aql(_ => _
+                    .FOR("item")
+                    .IN("UserModelCollection", _.LIMIT(1))
+                    .LET("Age").Var("item.Age")
+                    .LET("Floor").FLOOR(_.Var("item.Age"))
+                    .LET("Ceil").CEIL(_.Var("item.Age"))
+                    .LET("Round").ROUND(_.Var("item.Age"))
+                    .LET("Abs").ABS(_.Var("item.Age"))
+                    .LET("Sqrt").SQRT(_.Var("item.Age"))
+                    .LET("Rand").RAND()
+                    .RETURN.Object(_
+                        .Field("Age").Var("Age")
+                        .Field("Floor").Var("Floor")
+                        .Field("Ceil").Var("Ceil")
+                        .Field("Round").Var("Round")
+                        .Field("Abs").Var("Abs")
+                        .Field("Sqrt").Var("Sqrt")
+                        .Field("Rand").Var("Rand")
+                    ));
+
+
+            Console.WriteLine(expression.ToString(false));
+            Assert.AreEqual(query, expression.ToString(false));
+
+        }
     }
 }

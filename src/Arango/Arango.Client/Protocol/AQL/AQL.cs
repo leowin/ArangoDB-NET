@@ -45,5 +45,36 @@ namespace Arango.Client.Protocol
         internal const string String = "STRING";
         internal const string Val = "VAL";
         internal const string Var = "VAR";
+
+        //Numeric functions
+        /// <summary>
+        /// FLOOR(value): Returns the integer closest but not greater to value
+        /// </summary>
+        internal const string FLOOR = "FLOOR";
+        
+        /// <summary>
+        /// CEIL(value): Returns the integer closest but not less than value
+        /// </summary>
+        internal const string CEIL = "CEIL";
+        
+        /// <summary>
+        /// ROUND(value): Returns the integer closest to value
+        /// </summary>
+        internal const string ROUND = "ROUND";
+        
+        /// <summary>
+        /// ABS(value): Returns the absolute part of value
+        /// </summary>
+        internal const string ABS = "ABS";
+        
+        /// <summary>
+        /// SQRT(value): Returns the square root of value
+        /// </summary>
+        internal const string SQRT = "SQRT";
+
+        /// <summary>
+        /// RAND(): Returns a pseudo-random number between 0 and 1
+        /// </summary>
+        internal const string RAND = "RAND";
     }
 }

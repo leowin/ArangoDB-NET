@@ -538,6 +538,64 @@ namespace Arango.Client
 
             return AddEtom(etom);
         }
+
+        public ArangoQueryOperation FLOOR(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.FLOOR;
+
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation CEIL(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.CEIL;
+
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation ROUND(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.ROUND;
+
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation ABS(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.ABS;
+
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation SQRT(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.SQRT;
+
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation RAND()
+        {
+            var etom = new Etom();
+            etom.Type = AQL.RAND;
+
+            return AddEtom(etom);
+        }
         
         /*
          *  internal operations
@@ -1013,6 +1071,30 @@ namespace Arango.Client
                     case AQL.UPPER:
                         expression.Append(AQL.UPPER + "(");
                         expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+
+                    case AQL.FLOOR:
+                        expression.Append(AQL.FLOOR + "(");
+                        expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+                    case AQL.CEIL:
+                        expression.Append(AQL.CEIL + "(");
+                        expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+                    case AQL.ROUND:
+                        expression.Append(AQL.ROUND + "(");
+                        expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+                    case AQL.ABS:
+                        expression.Append(AQL.ABS + "(");
+                        expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+                    case AQL.SQRT:
+                        expression.Append(AQL.SQRT + "(");
+                        expression.Append(ToString(etom.Children, 0, prettyPrint) + ")");
+                        break;
+                    case AQL.RAND:
+                        expression.Append(AQL.RAND + "()");
                         break;
 	                // internal operations
                     case AQL.Field:

@@ -52,8 +52,9 @@
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -75,16 +76,7 @@
     <Compile Include="VersionTests\VersionTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="ArangoCollectionTests" />
-    <Folder Include="ArangoDocumentTests" />
-    <Folder Include="ArangoEdgeTests" />
-    <Folder Include="DummyObjects" />
-    <Folder Include="DatabaseTests" />
-    <Folder Include="DocumentTests" />
-    <Folder Include="FunctionTests" />
-    <Folder Include="QueryTests" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Arango.Client\Arango.Client.csproj">
       <Project>{9B3F90DF-4E2C-4171-86B3-5C0FF4B3B07E}</Project>
