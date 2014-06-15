@@ -596,6 +596,42 @@ namespace Arango.Client
 
             return AddEtom(etom);
         }
+
+        /// <summary>
+        /// DATE_TIMESTAMP(date): Creates a UTC timestamp value from date. 
+        /// DATE_TIMESTAMP(year, month, day, hour, minute, second, millisecond): Same as before, but allows specifying the individual date components separately. All parameters after day are optional.
+        /// </summary>
+        public ArangoQueryOperation DATE_TIMESTAMP(ArangoQueryOperation[] aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.DATE_TIMESTAMP;
+            etom.ChildrenList = new List<List<Etom>>();
+
+            for (int i = 0; i < aql.Length; i++)
+            {
+                etom.ChildrenList.Add(aql[i].ExpressionTree);
+            }
+
+            return AddEtom(etom);
+        }
+
+        /// <summary>
+        /// DATE_ISO8601(date): Returns an ISO8601 date time string from date. The date time string will always use UTC time, indicated by the Z at its end.
+        /// DATE_ISO8601(year, month, day, hour, minute, second, millisecond): same as before, but allows specifying the individual date components separately. All parameters after day are optional.
+        /// </summary>
+        public ArangoQueryOperation DATE_ISO8601(ArangoQueryOperation[] aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.DATE_ISO8601;
+            etom.ChildrenList = new List<List<Etom>>();
+
+            for (int i = 0; i < aql.Length; i++)
+            {
+                etom.ChildrenList.Add(aql[i].ExpressionTree);
+            }
+
+            return AddEtom(etom);
+        }
         
         /*
          *  internal operations
@@ -1095,6 +1131,36 @@ namespace Arango.Client
                         break;
                     case AQL.RAND:
                         expression.Append(AQL.RAND + "()");
+                        break;
+                    case AQL.DATE_TIMESTAMP:
+                        expression.Append(AQL.DATE_TIMESTAMP + "(");
+
+                        for (int j = 0; j < etom.ChildrenList.Count; j++)
+                        {
+                            expression.Append(ToString(etom.ChildrenList[j], 0, false));
+
+                            if (j < (etom.ChildrenList.Count - 1))
+                            {
+                                expression.Append(",");
+                            }
+                        }
+
+                        expression.Append(") ");
+                        break;
+                    case AQL.DATE_ISO8601:
+                        expression.Append(AQL.DATE_ISO8601 + "(");
+
+                        for (int j = 0; j < etom.ChildrenList.Count; j++)
+                        {
+                            expression.Append(ToString(etom.ChildrenList[j], 0, false));
+
+                            if (j < (etom.ChildrenList.Count - 1))
+                            {
+                                expression.Append(",");
+                            }
+                        }
+
+                        expression.Append(") ");
                         break;
 	                // internal operations
                     case AQL.Field:

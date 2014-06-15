@@ -76,5 +76,20 @@ namespace Arango.Client.Protocol
         /// RAND(): Returns a pseudo-random number between 0 and 1
         /// </summary>
         internal const string RAND = "RAND";
+
+        /// <summary>
+        /// DATE_TIMESTAMP(date): Creates a UTC timestamp value from date. 
+        /// DATE_TIMESTAMP(year, month, day, hour, minute, second, millisecond): Same as before, but allows specifying the individual date components separately. All parameters after day are optional.
+        /// </summary>
+        internal const string DATE_TIMESTAMP = "DATE_TIMESTAMP";
+        
+        /// <summary>
+        /// DATE_ISO8601(date): Returns an ISO8601 date time string from date. The date time string will always use UTC time, indicated by the Z at its end.
+        /// DATE_ISO8601(year, month, day, hour, minute, second, millisecond): same as before, but allows specifying the individual date components separately. All parameters after day are optional.
+        /// </summary>
+        internal const string DATE_ISO8601 = "DATE_ISO8601";
+
+        
+        
     }
 }

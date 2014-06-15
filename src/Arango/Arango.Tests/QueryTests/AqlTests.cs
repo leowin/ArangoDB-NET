@@ -223,8 +223,32 @@ namespace Arango.Tests.QueryTests
                         .Field("Rand").Var("Rand")
                     ));
 
+            Assert.AreEqual(query, expression.ToString(false));
 
-            Console.WriteLine(expression.ToString(false));
+        }
+
+        [Test()]
+        public void Shoud_generate_query_Date_Functions()
+        {
+            var query = "FOR item IN Dinners LIMIT 1 LET EventDate = item.EventDate LET Timestamp = DATE_TIMESTAMP(item.EventDate)  LET TimestampBuild = DATE_TIMESTAMP(2014,10,20,10,20,0,0)  LET ISO = DATE_ISO8601(item.EventDate)  LET ISOBuild = DATE_ISO8601(2014,10,20,10,20,0,0)  RETURN { 'EventDate': EventDate, 'Timestamp': Timestamp, 'TimestampBuild': TimestampBuild, 'ISO': ISO, 'ISOBuild': ISOBuild }";
+
+            ArangoQueryOperation expression = new ArangoQueryOperation()
+                .Aql(_ => _
+                    .FOR("item")
+                    .IN("Dinners", _.LIMIT(1))
+                    .LET("EventDate").Var("item.EventDate")
+                    .LET("Timestamp").DATE_TIMESTAMP(new [] {_.Var("item.EventDate") })
+                    .LET("TimestampBuild").DATE_TIMESTAMP(new[] { _.Val(2014), _.Val(10),   _.Val(20),  _.Val(10),  _.Val(20),  _.Val(0),  _.Val(0)})
+                    .LET("ISO").DATE_ISO8601(new[] { _.Var("item.EventDate") })
+                    .LET("ISOBuild").DATE_ISO8601(new[] { _.Val(2014), _.Val(10), _.Val(20), _.Val(10), _.Val(20), _.Val(0), _.Val(0) })
+                    .RETURN.Object(_
+                        .Field("EventDate").Var("EventDate")
+                        .Field("Timestamp").Var("Timestamp")
+                        .Field("TimestampBuild").Var("TimestampBuild")
+                        .Field("ISO").Var("ISO")
+                        .Field("ISOBuild").Var("ISOBuild")
+                    ));
+
             Assert.AreEqual(query, expression.ToString(false));
 
         }
