@@ -111,7 +111,7 @@ namespace Arango.Tests.FunctionTests
                 delegate(Document l, Document r)
                 {
     	            String leftKey = l.String("name");
-    	            String rightKey = l.String("name");
+    	            String rightKey = r.String("name");
     	
     	            return leftKey.CompareTo(rightKey);
                 }

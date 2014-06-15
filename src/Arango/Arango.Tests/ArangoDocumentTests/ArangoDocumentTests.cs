@@ -359,11 +359,12 @@ namespace Arango.Tests.ArangoDocumentTests
         {
             Database.CreateTestCollection(Database.TestDocumentCollectionName);
             var db = Database.GetTestDatabase();
-            
+            var guid = Guid.NewGuid();
             var person = new Person();
             person.FirstName = "Johny";
             person.LastName = "Bravo";
             person.Age = 25;
+            person.Guid = guid;
             
             db.Document.Create(Database.TestDocumentCollectionName, person);
             
@@ -393,6 +394,7 @@ namespace Arango.Tests.ArangoDocumentTests
             Assert.AreEqual(person.LastName, returnedPerson.LastName);
             Assert.AreEqual(person.Age, returnedPerson.Age);
             Assert.AreEqual(person.Aliased, returnedPerson.Aliased);
+            Assert.AreEqual(person.Guid, returnedPerson.Guid);
         }
         
         [Test()]
