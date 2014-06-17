@@ -71,6 +71,7 @@
     <Compile Include="Protocol\Operations\DatabaseOperation.cs" />
     <Compile Include="Protocol\Operations\EdgeOperation.cs" />
     <Compile Include="Protocol\Operations\FunctionOperation.cs" />
+    <Compile Include="Protocol\Operations\SyntaxQueryOperation.cs" />
     <Compile Include="Protocol\Operations\ServerOperation.cs" />
     <Compile Include="Protocol\Operations\VersionOperation.cs" />
     <Compile Include="Protocol\Request.cs" />

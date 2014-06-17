@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Arango.Client;
+/// <summary>
+/// this suite contains tests for checking
+/// the generation of aql queries.
+/// The checks runs without running an 
+/// arango server.
+///  
+/// When you wish that you query is checked
+/// by the arango server, you should call
+/// assertQuerySyntax(your_query_string);
+/// an the Suite AqlSyntaxCheckerTests will
+/// check your query.
+/// </summary>
 
 namespace Arango.Tests.QueryTests
 {
@@ -91,7 +103,7 @@ namespace Arango.Tests.QueryTests
                 "    LIMIT @offset, @count\n" +
                 "    RETURN list12";
 
-            var shrotQuery = "LET concat1 = CONCAT('xxx', 5, foo, TO_STRING(bar)) LET val1 = 'string' LET val2 = 123 LET lower = LOWER('ABC') LET upper = UPPER(foo) LET list1 = [1, 2, 3] LET list2 = [4, 5, 6] LET list3 = ( LET val11 = 'sss' LET val12 = 'whoa' RETURN 'abcd' ) LET len1 = LENGTH(var1) LET len2 = LENGTH([1, 2, 3]) LET len3 = LENGTH(( RETURN foo )) LET contains1 = CONTAINS('abc', foo) LET contains2 = CONTAINS('abc', foo, true) LET obj = { 'x': 'y' } LET boolVar = TO_BOOL(b) LET boolVal = TO_BOOL(0) LET listVar = TO_LIST(b) LET listVal = TO_LIST('a') LET numberVar = TO_NUMBER(b) LET numberVal = TO_NUMBER('3') LET stringVar = TO_STRING(b) LET stringVal = TO_NUMBER(4) LET docVar = DOCUMENT(foo.bar) LET docId = DOCUMENT('aaa/123') LET docIds = DOCUMENT(['aaa/123', 'aaa/345']) LET xxx = ( FOR foo IN EDGES(colx, 'colc/123', 'outbound') FOR foo IN EDGES(colx, xyz, 'any') RETURN ['one', 'two', 'three'] ) LET firstList = FIRST([1, 2, 3]) LET firstListContext = FIRST(( FOR foo IN bar LET xxx = 'abcd' RETURN xxx )) FOR foo1 IN col1 LET val11 = 'string' LET val12 = 123 LET list11 = [1, 2, 3] LET list12 = ( LET val21 = 'sss' LET val22 = 345 RETURN { 'foo': var, 'bar': 'val', 'baz': [1, 2, 3], 'boo': ( FOR x IN coly FOR y IN whoa RETURN var ), 'obj': { 'foo': 'bar' }, 'xxx': 'yyy' } ) FILTER (val11 > 123) && (val12 == 'foo') || (44 IN val13) && !(foo IN bar) FILTER CONTAINS(foo, 'abc') && CONTAINS(bar, 123) || CONTAINS(baz, 'def') && !CONTAINS(baz, 'def') COLLECT city = u.city COLLECT first = u.firstName, age = u.age INTO g SORT var1 ASC SORT var1, TO_NUMBER(var2) DESC LIMIT 5 LIMIT 0, 5 LIMIT @count LIMIT @offset, @count RETURN list12";
+            var shortQuery = "LET concat1 = CONCAT('xxx', 5, foo, TO_STRING(bar)) LET val1 = 'string' LET val2 = 123 LET lower = LOWER('ABC') LET upper = UPPER(foo) LET list1 = [1, 2, 3] LET list2 = [4, 5, 6] LET list3 = ( LET val11 = 'sss' LET val12 = 'whoa' RETURN 'abcd' ) LET len1 = LENGTH(var1) LET len2 = LENGTH([1, 2, 3]) LET len3 = LENGTH(( RETURN foo )) LET contains1 = CONTAINS('abc', foo) LET contains2 = CONTAINS('abc', foo, true) LET obj = { 'x': 'y' } LET boolVar = TO_BOOL(b) LET boolVal = TO_BOOL(0) LET listVar = TO_LIST(b) LET listVal = TO_LIST('a') LET numberVar = TO_NUMBER(b) LET numberVal = TO_NUMBER('3') LET stringVar = TO_STRING(b) LET stringVal = TO_NUMBER(4) LET docVar = DOCUMENT(foo.bar) LET docId = DOCUMENT('aaa/123') LET docIds = DOCUMENT(['aaa/123', 'aaa/345']) LET xxx = ( FOR foo IN EDGES(colx, 'colc/123', 'outbound') FOR foo IN EDGES(colx, xyz, 'any') RETURN ['one', 'two', 'three'] ) LET firstList = FIRST([1, 2, 3]) LET firstListContext = FIRST(( FOR foo IN bar LET xxx = 'abcd' RETURN xxx )) FOR foo1 IN col1 LET val11 = 'string' LET val12 = 123 LET list11 = [1, 2, 3] LET list12 = ( LET val21 = 'sss' LET val22 = 345 RETURN { 'foo': var, 'bar': 'val', 'baz': [1, 2, 3], 'boo': ( FOR x IN coly FOR y IN whoa RETURN var ), 'obj': { 'foo': 'bar' }, 'xxx': 'yyy' } ) FILTER (val11 > 123) && (val12 == 'foo') || (44 IN val13) && !(foo IN bar) FILTER CONTAINS(foo, 'abc') && CONTAINS(bar, 123) || CONTAINS(baz, 'def') && !CONTAINS(baz, 'def') COLLECT city = u.city COLLECT first = u.firstName, age = u.age INTO g SORT var1 ASC SORT var1, TO_NUMBER(var2) DESC LIMIT 5 LIMIT 0, 5 LIMIT @count LIMIT @offset, @count RETURN list12";
             
             ArangoQueryOperation expression = new ArangoQueryOperation()
                 .Aql(_ => _
@@ -194,7 +206,12 @@ namespace Arango.Tests.QueryTests
                 );
             
             Assert.AreEqual(prettyPrintQuery, expression.ToString());
-            Assert.AreEqual(shrotQuery, expression.ToString(false));
+            // the assertion will fail because the concate statement
+            // does not admit any integer as argument
+            // CONNCA('xxx', 5,...) is wrong. this is not allowend in arangodb
+            // assertQuerySyntax(prettyPrintQuery);
+            Assert.AreEqual(shortQuery, expression.ToString(false));
+            // assertQuerySyntax(shrotQuery);
         }
 
         [Test()]
@@ -224,7 +241,7 @@ namespace Arango.Tests.QueryTests
                     ));
 
             Assert.AreEqual(query, expression.ToString(false));
-
+            assertQuerySyntax(query);
         }
 
         [Test()]
@@ -251,6 +268,12 @@ namespace Arango.Tests.QueryTests
 
             Assert.AreEqual(query, expression.ToString(false));
 
+        }
+        /// <summary>
+        ///  used for checking the syntax of queries.
+        /// </summary>
+        /// <param name="queryStr"></param>
+        public virtual void assertQuerySyntax (string queryStr) {
         }
     }
 }
