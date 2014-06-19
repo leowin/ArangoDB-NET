@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>triAGENS-ArangoDB-NET</id>
+        <version>1.0.1</version>
+        <title>triAGENS-ArangoDB-NET</title>
+        <authors>yojimbo87;jsteemann;EstebanLombeyda</authors>
+        <owners>yojimbo87;EstebanLombeyda</owners>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/triAGENS/ArangoDB-NET</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>ArangoDB-NET is C# based driver for .NET/mono framework which implements ArangoDB REST </description>
+        <releaseNotes>Queries support datetime and mathematical operations;
+                      Documents can contain object properties for simple object types
+        </releaseNotes>
+        <tags>arango arangodb database document graph C# .net mono</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="5.0.6" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\src\Arango\Arango.Client\bin\Release\Arango.Client.dll" target="lib\Arango.Client.dll" />
+    </files>
+</package>

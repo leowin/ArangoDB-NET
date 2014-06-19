@@ -30,8 +30,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +71,7 @@
     <Compile Include="Protocol\Operations\DatabaseOperation.cs" />
     <Compile Include="Protocol\Operations\EdgeOperation.cs" />
     <Compile Include="Protocol\Operations\FunctionOperation.cs" />
+    <Compile Include="Protocol\Operations\SyntaxQueryOperation.cs" />
     <Compile Include="Protocol\Operations\ServerOperation.cs" />
     <Compile Include="Protocol\Operations\VersionOperation.cs" />
     <Compile Include="Protocol\Request.cs" />
@@ -84,12 +86,7 @@
     <Compile Include="API\Queries\ArangoOperator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Protocol\" />
-    <Folder Include="API\" />
-    <Folder Include="API\Admin\" />
-    <Folder Include="API\Documents\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

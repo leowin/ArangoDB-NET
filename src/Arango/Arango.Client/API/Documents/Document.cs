@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace Arango.Client
 {
@@ -1865,13 +1866,26 @@ namespace Arango.Client
                         } 
                         else
                         {
-                            propertyInfo.SetValue(genericObject, System.Convert.ChangeType(fieldValue, propertyInfo.PropertyType), null);
+                            object setValue = null;
+
+                            if(fieldValue is string)
+                                setValue = GetValueTypeFromString(propertyInfo.PropertyType, fieldValue as string);
+                            else
+                                setValue = System.Convert.ChangeType(fieldValue, propertyInfo.PropertyType);
+
+                            propertyInfo.SetValue(genericObject, setValue , null);
                         }
                     }
                 }
             }
 
             return genericObject;
+        }
+
+        public static object GetValueTypeFromString(Type type, string mystring)
+        {
+            var foo = TypeDescriptor.GetConverter(type);
+            return foo.ConvertFromInvariantString(mystring);
         }
         
         private static IEnumerable<DictionaryEntry> CastDict(IDictionary dictionary)
@@ -1941,18 +1955,21 @@ namespace Arango.Client
                     }
                     
                     var propertyValue = propertyInfo.GetValue(inputObject, null);
-                     
+                    
                     if (propertyValue == null)
                     {
                         document.SetField(propertyName, null);
+                        continue;
                     }
+                    
+                    Type propertyValueType = propertyValue.GetType();
                     // property is array or collection
-                    else if (propertyInfo.PropertyType.IsArray || propertyValue is IList)
+                    if (propertyValueType.IsArray  || (propertyValueType.IsGenericType && !(propertyValue is IDictionary)))
                     {
                         document.SetField(propertyName, ToList(propertyValue));
                     }
                     // property is class except the string type since string values are parsed differently
-                    else if (propertyInfo.PropertyType.IsClass && (propertyInfo.PropertyType.Name != "String"))
+                    else if (propertyValueType.IsClass && (propertyValueType != typeof(string)))
                     {
                         document.SetField(propertyName, ToDocument(propertyValue));
                     }

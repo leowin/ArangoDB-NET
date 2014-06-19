@@ -85,7 +85,15 @@ namespace Arango.Client
             {
                 return new ArangoVersionOperation(new VersionOperation(_connection));
             }
-        }        
+        }
+
+        public SyntaxQueryOperation SyntaxChecker 
+        {
+        	get
+        	{
+        		return new SyntaxQueryOperation(_connection);
+        	}
+        }
 
         /// <summary>
         /// Creates Arango database object with specified alias connection.

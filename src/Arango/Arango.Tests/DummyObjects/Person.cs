@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Arango.Client;
+using System;
 
 namespace Arango.Tests
 {
@@ -38,6 +39,8 @@ namespace Arango.Tests
         
         public List<string> Interests { get; set; }
         public List<Person> Followers { get; set; }
+
+        public Guid Guid { get; set; }
         
         public Person()
         {
