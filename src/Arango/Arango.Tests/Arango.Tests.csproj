@@ -74,6 +74,7 @@
     <Compile Include="QueryTests\AqlTests.cs" />
     <Compile Include="QueryTests\AqlSyntaxCheckerTests.cs" />
     <Compile Include="QueryTests\CursorTests.cs" />
+    <Compile Include="SimpleQueryTests\SimpleQueryTest.cs" />
     <Compile Include="VersionTests\VersionTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

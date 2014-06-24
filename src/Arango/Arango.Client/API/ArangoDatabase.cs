@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Arango.Client.Protocol;
+using Arango.Client.API;
 
 namespace Arango.Client
 {
@@ -93,6 +94,14 @@ namespace Arango.Client
         	{
         		return new SyntaxQueryOperation(_connection);
         	}
+        }
+
+        public SimpleQueryOperation SimpleQuery
+        {
+            get
+            {
+                return new SimpleQueryOperation(new SimpleQueryOperationProtocol(_connection));
+            }
         }
 
         /// <summary>
