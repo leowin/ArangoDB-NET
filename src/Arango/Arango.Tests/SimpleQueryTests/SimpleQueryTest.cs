@@ -84,7 +84,69 @@ namespace Arango.Tests.SimpleQueryTests
             });
 
             Assert.AreEqual(54321, result.Int("bar"));
+        }
 
+        [Test()]
+        public void Should_return_simple_any()
+        {
+            var docs = CreateDummyDocuments();
+            var db = Database.GetTestDatabase();
+
+
+            var result = db.SimpleQuery.Any(new SimpleQueryOperation.AnyRequest
+            {
+                Collection = Database.TestDocumentCollectionName,
+            });
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test()]
+        public void Should_return_remove_by_example()
+        {
+            var docs = CreateDummyDocuments();
+            var db = Database.GetTestDatabase();
+
+
+            var result = db.SimpleQuery.RemoveByExample(new SimpleQueryOperation.RemoveByExampleRequest
+            {
+                Collection = Database.TestDocumentCollectionName,
+                Example = new { bar = 54321 }
+            });
+
+            Assert.AreEqual(5, result);
+
+            var resultAll = db.SimpleQuery.All(new SimpleQueryOperation.AllRequest
+            {
+                Collection = Database.TestDocumentCollectionName
+            });
+
+            Assert.AreEqual(1, resultAll.Count);
+        }
+
+        [Test()]
+        public void Should_return_update_by_example()
+        {
+            var docs = CreateDummyDocuments();
+            var db = Database.GetTestDatabase();
+
+
+            var result = db.SimpleQuery.UpdateByExample(new SimpleQueryOperation.UpdateByExampleRequest
+            {
+                Collection = Database.TestDocumentCollectionName,
+                Example = new { bar = 54321 },
+                NewValue = new { foo = "Hello Nurse"}
+            });
+
+            Assert.AreEqual(5, result);
+
+            var resultAll = db.SimpleQuery.ByExample(new SimpleQueryOperation.ByExampleRequest
+            {
+                Collection = Database.TestDocumentCollectionName,
+                Example = new { foo = "Hello Nurse" }
+            });
+
+            Assert.AreEqual(5, resultAll.Count);
         }
 
         public class Foo
