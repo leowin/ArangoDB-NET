@@ -9,6 +9,7 @@ namespace Arango.Client.Protocol
         Cursor,
         Function,
         Version,
-        Server
+        Server,
+        Traversal
     }
 }
