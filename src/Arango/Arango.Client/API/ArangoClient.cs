@@ -84,6 +84,7 @@ namespace Arango.Client
 
         /// <summary>
         /// Stores connection data to existing database under specified alias which will be used by ArangoDatabase objects. 
+        /// If the alias already exists it does not add anything
         /// </summary>
         /// <param name="hostname">Hostname of database connection.</param>
         /// <param name="port">Port number of database connection.</param>
@@ -92,12 +93,17 @@ namespace Arango.Client
         /// <param name="alias">Alias under which will be database connection stored.</param>
         /// <param name="userName">User name for authentication.</param>
         /// <param name="password">Password for authentication.</param>
-        public static void AddConnection(string hostname, int port, bool isSecured, string databaseName, string alias, string userName = "", string password = "")
+        public static bool AddConnection(string hostname, int port, bool isSecured, string databaseName, string alias, string userName = "", string password = "")
         {
+            if (_connections.ContainsKey(alias))
+                return false;
+
             _connections.Add(
                 alias,
                 new Connection(hostname, port, isSecured, databaseName, alias, userName, password)
             );
+
+            return true;
         }
 
         internal static Connection GetConnection(string alias)
