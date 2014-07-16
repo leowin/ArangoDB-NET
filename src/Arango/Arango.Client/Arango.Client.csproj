@@ -63,6 +63,8 @@
     <Compile Include="API\Edges\ArangoEdgeOperation.cs" />
     <Compile Include="API\Functions\ArangoFunctionOperation.cs" />
     <Compile Include="API\Queries\ArangoQueryOperation.cs" />
+    <Compile Include="API\SimpleQueryOperation.cs" />
+    <Compile Include="API\Traversals\Traversal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\AQL\AQL.cs" />
     <Compile Include="Protocol\Connection.cs" />
@@ -71,8 +73,10 @@
     <Compile Include="Protocol\Operations\DatabaseOperation.cs" />
     <Compile Include="Protocol\Operations\EdgeOperation.cs" />
     <Compile Include="Protocol\Operations\FunctionOperation.cs" />
+    <Compile Include="Protocol\Operations\SimpleQueryOperation.cs" />
     <Compile Include="Protocol\Operations\SyntaxQueryOperation.cs" />
     <Compile Include="Protocol\Operations\ServerOperation.cs" />
+    <Compile Include="Protocol\Operations\TraversalOperation.cs" />
     <Compile Include="Protocol\Operations\VersionOperation.cs" />
     <Compile Include="Protocol\Request.cs" />
     <Compile Include="Protocol\RequestType.cs" />
