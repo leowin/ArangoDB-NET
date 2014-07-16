@@ -161,6 +161,16 @@ namespace Arango.Client
 
         #region IN
 
+        public ArangoQueryOperation IN(ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.IN;
+            
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+
         public ArangoQueryOperation IN(string name, ArangoQueryOperation aql)
         {
             var etom = new Etom();
@@ -632,7 +642,497 @@ namespace Arango.Client
 
             return AddEtom(etom);
         }
+
+      #region GRAPH
         
+        public ArangoQueryOperation GRAPH_EDGES(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_EDGES;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;
+            //etom.ChildrenList = new List<List<Etom>>{aql.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_EDGES(string graphName, ArangoQueryOperation aql1, ArangoQueryOperation aql2)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_EDGES;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_VERTICES(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_VERTICES;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_VERTICES(
+            string graphName, 
+            ArangoQueryOperation aql1, 
+            ArangoQueryOperation aql2
+           )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_VERTICES;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_NEIGHBORS(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_NEIGHBORS;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_NEIGHBORS(
+            string graphName, 
+            ArangoQueryOperation aql1, 
+            ArangoQueryOperation aql2
+       )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_NEIGHBORS;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_COMMON_NEIGHBORS(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2
+       )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_COMMON_NEIGHBORS;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree
+                
+            };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_COMMON_NEIGHBORS(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3,
+            ArangoQueryOperation aql4
+       )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_COMMON_NEIGHBORS;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree,
+                aql4.ExpressionTree
+                
+            };
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_COMMON_PROPERTIES(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2
+       )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_COMMON_PROPERTIES;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree
+                
+            };
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_COMMON_PROPERTIES(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3
+       )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_COMMON_PROPERTIES;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree
+                
+            };
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_PATHS(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_PATHS;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_PATHS(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_PATHS;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_ABSOLUTE_ECCENTRICITY(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_ECCENTRICITY;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_ABSOLUTE_ECCENTRICITY(string graphName, ArangoQueryOperation aql1, ArangoQueryOperation aql2)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_ECCENTRICITY;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_ABSOLUTE_CLOSENESS(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_CLOSENESS;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_ABSOLUTE_CLOSENESS(string graphName, ArangoQueryOperation aql1, ArangoQueryOperation aql2)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_CLOSENESS;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_ABSOLUTE_BETWEENNESS(string graphName, ArangoQueryOperation aql)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_BETWEENNESS;
+            etom.Value = graphName;
+            etom.Children = aql.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_ABSOLUTE_BETWEENNESS(string graphName, ArangoQueryOperation aql1, ArangoQueryOperation aql2)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ABSOLUTE_BETWEENNESS;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_SHORTEST_PATH(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_SHORTEST_PATH;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{aql1.ExpressionTree, aql2.ExpressionTree};
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_SHORTEST_PATH(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_SHORTEST_PATH;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_TRAVERSAL(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_TRAVERSAL;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_TRAVERSAL(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_TRAVERSAL;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_TRAVERSAL(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_TRAVERSAL;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_TRAVERSAL_TREE(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_TRAVERSAL_TREE;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_TRAVERSAL_TREE(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3,
+            ArangoQueryOperation aql4
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_TRAVERSAL_TREE;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree,
+                aql4.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_DISTANCE_TO(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2,
+            ArangoQueryOperation aql3
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_DISTANCE_TO;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree,
+                aql3.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_DISTANCE_TO(
+            string graphName,
+            ArangoQueryOperation aql1,
+            ArangoQueryOperation aql2
+        )
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_DISTANCE_TO;
+            etom.Value = graphName;
+            etom.ChildrenList = new List<List<Etom>>{
+                aql1.ExpressionTree,
+                aql2.ExpressionTree
+           };
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_ECCENTRICITY(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ECCENTRICITY;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_ECCENTRICITY(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_ECCENTRICITY;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_CLOSENESS(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_CLOSENESS;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_CLOSENESS(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_CLOSENESS;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_BETWEENNESS(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_BETWEENNESS;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_BETWEENNESS(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_BETWEENNESS;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_RADIUS(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_RADIUS;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_RADIUS(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_RADIUS;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_DIAMETER(string graphName, ArangoQueryOperation aql1)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_DIAMETER;
+            etom.Value = graphName;
+            etom.Children = aql1.ExpressionTree;;
+
+            return AddEtom(etom);
+        }
+
+        public ArangoQueryOperation GRAPH_DIAMETER(string graphName)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_DIAMETER;
+            etom.Value = graphName;
+
+            return AddEtom(etom);
+        }
+        
+        public ArangoQueryOperation GRAPH_JSON(string json)
+        {
+            var etom = new Etom();
+            etom.Type = AQL.GRAPH_JSON;
+            etom.Value = json;
+
+            return AddEtom(etom);
+        }
+        
+        
+        #endregion
+          
         /*
          *  internal operations
          */
@@ -1162,6 +1662,39 @@ namespace Arango.Client
 
                         expression.Append(") ");
                         break;
+                    case AQL.GRAPH_EDGES:
+                    case AQL.GRAPH_VERTICES:
+                    case AQL.GRAPH_NEIGHBORS:
+                    case AQL.GRAPH_ABSOLUTE_BETWEENNESS:
+                    case AQL.GRAPH_ABSOLUTE_CLOSENESS:
+                    case AQL.GRAPH_ABSOLUTE_ECCENTRICITY:
+                    case AQL.GRAPH_COMMON_NEIGHBORS:
+                    case AQL.GRAPH_COMMON_PROPERTIES:
+                    case AQL.GRAPH_PATHS:
+                    case AQL.GRAPH_SHORTEST_PATH:
+                    case AQL.GRAPH_TRAVERSAL:
+                    case AQL.GRAPH_TRAVERSAL_TREE:
+                    case AQL.GRAPH_DISTANCE_TO:
+                    case AQL.GRAPH_ECCENTRICITY:
+                    case AQL.GRAPH_CLOSENESS:
+                    case AQL.GRAPH_BETWEENNESS:
+                    case AQL.GRAPH_RADIUS:
+                    case AQL.GRAPH_DIAMETER:
+                        expression.Append(etom.Type + "(");
+                        expression.Append("'" + etom.Value + "'");
+                        if (etom.Children.Count > 0) {
+                            expression.Append(ToString(etom.Children, 0, prettyPrint));
+                        } else if (etom.ChildrenList != null && etom.ChildrenList.Count > 0) {
+                            for(int idx = 0; idx < etom.ChildrenList.Count; idx++) {
+                                expression.Append(ToString(etom.ChildrenList[idx], 0, prettyPrint));
+                            }
+                        }
+                        expression.Append(")");
+                        break;
+                    case AQL.GRAPH_JSON:
+                        expression.Append(", " + etom.Value);
+                        break;
+                        
 	                // internal operations
                     case AQL.Field:
                         if (i != 0)

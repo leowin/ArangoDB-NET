@@ -29,6 +29,7 @@ namespace Arango.Client.Protocol
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
+                case HttpStatusCode.Created:
                     databases = response.Document.List<string>("result");
                     break;
                 default:

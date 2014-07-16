@@ -1,0 +1,95 @@
+Vergleichen der Dateien ArangoDatabase.cs und ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+***** ArangoDatabase.cs
+using Arango.Client.Protocol;
+using Arango.Client.API;
+
+***** ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+using Arango.Client.Protocol;
+
+*****
+
+***** ArangoDatabase.cs
+        /// <summary> 
+        /// Expose server functionality
+        /// </summary>
+        public ArangoServerOperation Server
+        {
+***** ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+        /// <summary> 
+        /// Expose graph functionality.
+        /// </summary>
+        public ArangoGraphOperation Graph
+        {
+*****
+
+***** ArangoDatabase.cs
+            {
+                return new ArangoServerOperation(new ServerOperation(_connection));
+            }
+        }               
+                
+        /// <summary> 
+        /// Expose version functionality
+        /// </summary>
+        public ArangoVersionOperation Version
+        {
+            get
+            {
+                return new ArangoVersionOperation(new VersionOperation(_connection));
+            }
+***** ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+            {
+                return new ArangoGraphOperation(new GraphOperation(_connection));
+            }
+*****
+
+***** ArangoDatabase.cs
+
+        public SyntaxQueryOperation SyntaxChecker 
+        {
+                get
+                {
+                        return new SyntaxQueryOperation(_connection);
+                }
+        }
+
+***** ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+
+        /// <summary>
+        /// Creates Arango database object with specified alias connection.
+        /// </summary>
+        /// <param name="alias">Connection alias which was previously created through ArangoClient.AddConnection method.</param
+>
+        public ArangoDatabase(string alias)
+        {
+            _connection = ArangoClient.GetConnection(alias);
+        }
+    }
+}
+
+*****
+
+***** ArangoDatabase.cs
+        public SimpleQueryOperation SimpleQuery
+        {
+            get
+            {
+                return new SimpleQueryOperation(new SimpleQueryOperationProtocol(_connection));
+            }
+        }
+
+        /// <summary>
+        /// Creates Arango database object with specified alias connection.
+        /// </summary>
+        /// <param name="alias">Connection alias which was previously created through ArangoClient.AddConnection method.</param
+>
+        public ArangoDatabase(string alias)
+        {
+            _connection = ArangoClient.GetConnection(alias);
+        }
+    }
+}
+
+***** ..\..\..\..\..\..\ARANGODB-NET\SRC\ARANGO\ARANGO.CLIENT\API\ARANGODATABASE.CS
+*****
+

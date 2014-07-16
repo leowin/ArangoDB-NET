@@ -76,6 +76,17 @@ namespace Arango.Client
                 return new ArangoServerOperation(new ServerOperation(_connection));
             }
         }               
+
+        /// <summary>
+        /// Expose graph functionality.
+        /// </summary>
+        public ArangoGraphOperation Graph
+        {
+            get
+            {
+                return new ArangoGraphOperation(new GraphOperation(_connection));
+            }
+        }
                 
         /// <summary> 
         /// Expose version functionality

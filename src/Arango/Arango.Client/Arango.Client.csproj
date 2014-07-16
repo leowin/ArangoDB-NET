@@ -62,6 +62,9 @@
     <Compile Include="API\Edges\ArangoEdgeDirection.cs" />
     <Compile Include="API\Edges\ArangoEdgeOperation.cs" />
     <Compile Include="API\Functions\ArangoFunctionOperation.cs" />
+    <Compile Include="API\Graph\ArangoGraph.cs" />
+    <Compile Include="API\Graph\ArangoGraphEdgeDefinition.cs" />
+    <Compile Include="API\Graph\ArangoGraphOperation.cs" />
     <Compile Include="API\Queries\ArangoQueryOperation.cs" />
     <Compile Include="API\SimpleQueryOperation.cs" />
     <Compile Include="API\Traversals\Traversal.cs" />
@@ -73,6 +76,8 @@
     <Compile Include="Protocol\Operations\DatabaseOperation.cs" />
     <Compile Include="Protocol\Operations\EdgeOperation.cs" />
     <Compile Include="Protocol\Operations\FunctionOperation.cs" />
+    <Compile Include="Protocol\Operations\GraphGraphOperation.cs" />
+    <Compile Include="Protocol\Operations\GraphOperation.cs" />
     <Compile Include="Protocol\Operations\SimpleQueryOperation.cs" />
     <Compile Include="Protocol\Operations\SyntaxQueryOperation.cs" />
     <Compile Include="Protocol\Operations\ServerOperation.cs" />
@@ -90,7 +95,9 @@
     <Compile Include="API\Queries\ArangoOperator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="API\Graph" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

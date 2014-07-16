@@ -27,6 +27,26 @@ namespace Arango.Client.Protocol
         internal const string TO_NUMBER = "TO_NUMBER";
         internal const string TO_STRING = "TO_STRING";
         internal const string UPPER = "UPPER";
+        // graph
+        internal const string GRAPH_JSON = "GRAPH_JSON";
+        internal const string GRAPH_EDGES = "GRAPH_EDGES";
+        internal const string GRAPH_VERTICES = "GRAPH_VERTICES";
+        internal const string GRAPH_NEIGHBORS = "GRAPH_NEIGHBORS";
+        internal const string GRAPH_COMMON_NEIGHBORS = "GRAPH_COMMON_NEIGHBORS";
+        internal const string GRAPH_COMMON_PROPERTIES = "GRAPH_COMMON_PROPERTIES";
+        internal const string GRAPH_PATHS = "GRAPH_PATHS";
+        internal const string GRAPH_SHORTEST_PATH = "GRAPH_SHORTEST_PATH";
+        internal const string GRAPH_TRAVERSAL = "GRAPH_TRAVERSAL";
+        internal const string GRAPH_TRAVERSAL_TREE = "GRAPH_TRAVERSAL_TREE";
+        internal const string GRAPH_DISTANCE_TO = "GRAPH_DISTANCE_TO";
+        internal const string GRAPH_ABSOLUTE_ECCENTRICITY = "GRAPH_ABSOLUTE_ECCENTRICITY";
+        internal const string GRAPH_ECCENTRICITY = "GRAPH_ECCENTRICITY";
+        internal const string GRAPH_ABSOLUTE_CLOSENESS = "GRAPH_ABSOLUTE_CLOSENESS";
+        internal const string GRAPH_CLOSENESS = "GRAPH_CLOSENESS";
+        internal const string GRAPH_ABSOLUTE_BETWEENNESS = "GRAPH_ABSOLUTE_BETWEENNESS";
+        internal const string GRAPH_BETWEENNESS = "GRAPH_BETWEENNESS";
+        internal const string GRAPH_RADIUS = "GRAPH_RADIUS";
+        internal const string GRAPH_DIAMETER = "GRAPH_DIAMETER";
 
         // symbols
         internal const string AND = "&&";

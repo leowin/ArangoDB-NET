@@ -58,5 +58,14 @@ namespace Arango.Client
         {
             return _collectionOperation.PutTruncate(name);
         }
+
+        /// <summary>
+        /// Determines if the collection with the specified name exists.
+        /// </summary>
+        /// <param name="name">Collection name.</param>
+        public bool Exists(string name)
+        {
+            return _collectionOperation.Exists(name);
+        }
     }
 }
