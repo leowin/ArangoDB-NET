@@ -65,13 +65,13 @@
     <Compile Include="ArangoCollectionTests\ArangoCollectionTests.cs" />
     <Compile Include="ArangoDocumentTests\ArangoDocumentTests.cs" />
     <Compile Include="ArangoEdgeTests\ArangoEdgeTests.cs" />
+    <Compile Include="ArangoGraphTests\ArangoGraphTests.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseTests\DatabaseTests.cs" />
     <Compile Include="DocumentTests\DocumentTests.cs" />
     <Compile Include="DummyObjects\Alert.cs" />
     <Compile Include="DummyObjects\Person.cs" />
     <Compile Include="FunctionTests\ArangoFunctionTests.cs" />
-    <Compile Include="QueryTests\AqlGraphTests.cs" />
     <Compile Include="QueryTests\AqlTests.cs" />
     <Compile Include="QueryTests\AqlSyntaxCheckerTests.cs" />
     <Compile Include="QueryTests\CursorTests.cs" />
@@ -79,7 +79,9 @@
     <Compile Include="VersionTests\VersionTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ArangoGraphTests" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arango.Client\Arango.Client.csproj">
       <Project>{9B3F90DF-4E2C-4171-86B3-5C0FF4B3B07E}</Project>

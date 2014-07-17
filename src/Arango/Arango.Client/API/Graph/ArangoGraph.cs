@@ -78,6 +78,21 @@ namespace Arango.Client
         }
         
         /// <summary>
+        /// Get edge definition by name.
+        /// </summary>
+        public ArangoGraphEdgeDefinition edgeDefinition(string collectionName) {
+            if (this.edgeCollections().Contains(collectionName)) {
+                foreach(ArangoGraphEdgeDefinition ed in this.edgeDefinitions) {
+                    if (ed.collection == collectionName) {
+                        return ed;
+                    }
+                }
+                
+            }
+            return null;
+        }
+        
+        /// <summary>
         /// Add new edge definition to the graph.
         /// </summary>
         public ArangoGraph addEdgeDefinition(ArangoGraphEdgeDefinition edgeDefinition) {

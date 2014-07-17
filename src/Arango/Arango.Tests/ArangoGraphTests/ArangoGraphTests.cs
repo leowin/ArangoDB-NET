@@ -10,11 +10,13 @@ namespace Arango.Tests.ArangoGraphTests
     [TestFixture()] 
     public class ArangoGraphTests : IDisposable
     {
+        ArangoDatabase db;
         
         [SetUp()]
         public void Init()
         {
             Database.CreateTestDatabase(Database.TestDatabaseGeneral);
+            db = Database.GetTestDatabase();
         }
         
         [TearDown()]
@@ -27,7 +29,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_get_all_graphs()
         {
-            var db = Database.GetTestDatabase();
             List<String> vertexCollections = new List<String>();
             vertexCollections.Add("vc1");
             vertexCollections.Add("vc2");
@@ -48,7 +49,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_get_graph_by_name()
         {
-            var db = Database.GetTestDatabase();
             List<String> vertexCollections = new List<String>();
             vertexCollections.Add("vc1");
             vertexCollections.Add("vc2");
@@ -75,7 +75,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_create_and_get_empty_graph()
         {
-            var db = Database.GetTestDatabase();
             string name = "UnitTestGraph";
             db.Graph.Create(name);
             ArangoGraph graph = db.Graph.Get(name);
@@ -88,7 +87,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_create_and_get_graph_with_orphanage()
         {
-            var db = Database.GetTestDatabase();
             List<string> orphanage = new List<string>{"v1"};
             string name = "UnitTestGraph";
             db.Graph.Create(name, orphanage);
@@ -102,7 +100,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_create_and_get_graph_with_edge_definition()
         {
-            var db = Database.GetTestDatabase();
             ArangoGraphEdgeDefinition ed = new ArangoGraphEdgeDefinition(
                 "unitTestEdge",
                 new List<string>{"unitTestFrom"},
@@ -121,7 +118,6 @@ namespace Arango.Tests.ArangoGraphTests
         [Test()]
         public void Should_delete_existing_graph()
         {
-            var db = Database.GetTestDatabase();
             string g1 = "UnitTestGraph1";
             string g2 = "UnitTestGraph2";
             string g3 = "UnitTestGraph3";
@@ -155,7 +151,7 @@ namespace Arango.Tests.ArangoGraphTests
             string ed2 = "ed2";
             string name2 = "UnitTestGraph2";
             
-            var db = Database.GetTestDatabase();
+            ArangoDatabase db = Database.GetTestDatabase();
             
             //Graph 1
             List<ArangoGraphEdgeDefinition> eds1 = new List<ArangoGraphEdgeDefinition>();
@@ -224,6 +220,8 @@ namespace Arango.Tests.ArangoGraphTests
         string vertexCol1 = "UnitTestVertex1";
         string vertexCol2 = "UnitTestVertex2";
         string vertexCol3 = "UnitTestVertex3";
+        ArangoGraphEdgeDefinition ed1;
+        ArangoGraphEdgeDefinition ed2;
         ArangoDatabase db;
         ArangoGraph g;
         
@@ -232,13 +230,13 @@ namespace Arango.Tests.ArangoGraphTests
             Database.CreateTestDatabase(Database.TestDatabaseGeneral);
             db = Database.GetTestDatabase();
             List<ArangoGraphEdgeDefinition> eds = new List<ArangoGraphEdgeDefinition>();
-            ArangoGraphEdgeDefinition ed1 = new ArangoGraphEdgeDefinition(
+            ed1 = new ArangoGraphEdgeDefinition(
                 edgeCol1,
                 new List<String>{fromCol1, fromCol2},
                 new List<String>{toCol1, toCol2}
             );
             eds.Add(ed1);
-            ArangoGraphEdgeDefinition ed2 = new ArangoGraphEdgeDefinition(
+            ed2 = new ArangoGraphEdgeDefinition(
                 edgeCol2,
                 new List<String>{fromCol2, fromCol3},
                 new List<String>{toCol2, toCol3}
@@ -249,8 +247,6 @@ namespace Arango.Tests.ArangoGraphTests
             vertexCollections.Add(vertexCol2);
             vertexCollections.Add(vertexCol3);
             g = db.Graph.Create(graphName, eds, vertexCollections);
-            
-
         }
         
         [TearDown()] public void Dispose()
@@ -369,8 +365,24 @@ namespace Arango.Tests.ArangoGraphTests
         {
             List<string> result = g.edgeCollections();
             Assert.True(result.Contains(edgeCol1));
-            Assert.True(result.Contains(edgeCol1));
+            Assert.True(result.Contains(edgeCol2));
             Assert.AreEqual(2, result.Count());
+        }
+        
+        [Test()]
+        public void Should_get_all_single_edge_definition()
+        {
+            ArangoGraphEdgeDefinition result = g.edgeDefinition(edgeCol1);
+            Assert.AreEqual(ed1.collection, result.collection);
+            Assert.AreEqual(ed1.from, result.from);
+            Assert.AreEqual(ed1.to, result.to);
+        }
+        
+        [Test()]
+        public void Should_get_all_single_edge_definition_null()
+        {
+            ArangoGraphEdgeDefinition result = g.edgeDefinition("blub");
+            Assert.Null(result);
         }
         
         [Test()]
