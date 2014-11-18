@@ -68,7 +68,7 @@ namespace Arango.Tests.ArangoGraphTests
             Assert.AreEqual(graph.edgeDefinitions.First().collection, ed1.collection);
             Assert.AreEqual(graph.edgeDefinitions.First().from, ed1.from);
             Assert.AreEqual(graph.edgeDefinitions.First().to, ed1.to);
-//            Assert.AreEqual(2, graph.vertexCollections.Count);
+            Assert.AreEqual(6, graph.vertexCollections().Count);
 
         }
 

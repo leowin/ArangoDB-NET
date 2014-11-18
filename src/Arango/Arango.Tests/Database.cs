@@ -28,6 +28,8 @@ namespace Arango.Tests
             
             Hostname = "127.0.0.1";
             Port = 8529;
+//            Hostname = "192.168.173.6";
+//            Port = 8530;
             IsSecured = false;
             DatabaseName = TestDatabaseGeneral;
             Alias = "test";

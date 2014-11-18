@@ -19,8 +19,23 @@ using Arango.Client;
 namespace Arango.Tests.QueryTests
 {
     [TestFixture()]
-    public class AqlTests
+    public class AqlTests : IDisposable
     {
+        ArangoDatabase db;
+        
+        [SetUp()]
+        public void Init()
+        {
+            Database.CreateTestDatabase(Database.TestDatabaseGeneral);
+            db = Database.GetTestDatabase();
+        }
+        
+        [TearDown()]
+        public void Dispose()
+        {
+            Database.DeleteTestDatabase(Database.TestDatabaseGeneral);
+        }
+        
         [Test()]
         public void Should_generate_query()
         {
@@ -267,8 +282,32 @@ namespace Arango.Tests.QueryTests
                     ));
 
             Assert.AreEqual(query, expression.ToString(false));
-
         }
+        
+        [Test()]
+        public void Shoud_generate_and_execute_query()
+        {
+            
+            String collectionName = "UnitTestCollection"; 
+            ArangoCollection myCollection = new ArangoCollection();
+            myCollection.Name = collectionName;
+            db.Collection.Create(myCollection);
+            Document myDocument;
+            for(int i = 0; i< 100; i++) {
+                myDocument = new Document();
+                myDocument.Add("num", i);
+                db.Document.Create(collectionName, myDocument, true, false);
+            }
+            
+            var query = "FOR docs IN UnitTestCollection return docs";
+            var documents = db.Query.Aql(query).ToList();
+            
+            Assert.AreEqual(documents.Count(), 100);
+            
+        }
+        
+        
+        
         /// <summary>
         ///  used for checking the syntax of queries.
         /// </summary>

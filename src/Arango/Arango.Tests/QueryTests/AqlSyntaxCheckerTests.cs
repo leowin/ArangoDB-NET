@@ -16,7 +16,7 @@ namespace Arango.Tests.QueryTests
 	///  implements the functionality for checking the syntax 
 	/// of a query by arangod
 	/// </summary>
-	public class AqlSyntaxCheckerTests : AqlTests, IDisposable
+	public class AqlSyntaxCheckerTests : AqlTests
 	{
 		public AqlSyntaxCheckerTests()
 		{
@@ -34,10 +34,5 @@ namespace Arango.Tests.QueryTests
 			Assert.AreEqual(200, result.code);
 		}
 
-		public void Dispose()
-		{
-
-			Database.DeleteTestDatabase(Database.TestDatabaseGeneral);
-		}
 	}
 }
