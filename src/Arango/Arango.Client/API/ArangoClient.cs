@@ -95,13 +95,16 @@ namespace Arango.Client
         /// <param name="password">Password for authentication.</param>
         public static bool AddConnection(string hostname, int port, bool isSecured, string databaseName, string alias, string userName = "", string password = "")
         {
-            if (_connections.ContainsKey(alias))
-                return false;
+            lock (_connections)
+            {
+                if (_connections.ContainsKey(alias))
+                    return false;
 
-            _connections.Add(
-                alias,
-                new Connection(hostname, port, isSecured, databaseName, alias, userName, password)
-            );
+                _connections.Add(
+                    alias,
+                    new Connection(hostname, port, isSecured, databaseName, alias, userName, password)
+                );
+            }
 
             return true;
         }
